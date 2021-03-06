@@ -1,0 +1,30 @@
+.cart{
+    cursor: pointer;
+    position: relative;
+
+
+    .number-of-items{
+        border-radius: 50%;
+        width: 20px;
+        height: 20px;
+    
+        background: rgb(255, 0, 0);
+        border: 2px solid rgb(255, 0, 0);
+        color: rgb(255, 255, 255);
+        text-align: center;
+        font-weight: bold;
+        position: absolute;
+        top: -15px;
+        right: -15px;
+    
+
+
+        &--visible{
+            visibility: visible;
+        }
+
+        &--hidden {
+            visibility: hidden;
+        }
+    }
+}

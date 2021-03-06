@@ -1,0 +1,142 @@
+.header {
+  min-height: 10vh;
+  display: flex;
+  justify-content: space-between;
+  height: 80px;
+  align-items: center;
+  background-color: white;
+  padding: 0 40px;
+
+  .hamburger {
+      display: none;
+      
+  }
+
+  .nav-items {
+    flex-grow: 1;
+  }
+
+  .nav-items ul {
+    list-style: none;
+  }
+
+  .right-side-options {
+    float: right;
+    flex-grow: 1;
+    align-items: center;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+
+    .test-class {
+      height: auto;
+    }
+  }
+
+  .logo img {
+    height: 60px;
+    width: 60px;
+    padding-right: 10px;
+  }
+
+  .item {
+    text-decoration: none;
+    display: inline;
+    color: var(--color-text-main);
+    padding: 0 10px;
+
+    &--sale {
+      color: red;
+      font-weight: bold;
+    }
+
+    li {
+      display: inline;
+    }
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  .activeStyle {
+    font-weight: bold;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .header {
+    padding: 0 0;
+    z-index: 3;
+    height: 80px;
+    width: 100%;
+    position: fixed;
+    max-height: 80px;
+
+    .hamburger{
+        display: block;
+        cursor: pointer;
+        padding-left: 20px;
+    }
+
+    .logo{
+        width: 100%;
+        position: absolute;
+        left: 0;
+        right: 0;
+        width: 60px;
+        height: 60px;
+        margin-left: auto; 
+        margin-right: auto; 
+    }
+
+
+    .nav-items {
+      position: fixed;
+      display: block;
+      background-color: black;
+      height: calc(100vh - 80px);
+      align-self: flex-start;
+      width:100%;
+      text-align: center;
+      margin-top: 80px;
+      clip-path: circle(0px at 0 0);
+      -webkit-clip-path: circle(0px at 0 0);
+      transition: all 0.5s ease-out;
+      align-items: center;
+      font-size: 18px;
+
+      ul{
+        margin: 15vh;
+      }
+
+
+
+      &--visible{
+          visibility: visible;
+          clip-path: circle(500px at 0 0);
+          -webkit-clip-path: circle(1000px at 0 0);
+      }
+
+      &--hidden{
+          visibility: hidden;
+      }
+    }
+
+    .item {
+      display: list-item;
+      padding: 30px 0;
+      color: white;
+
+      &--sale {
+        color: red;
+        font-weight: bold;
+      }
+
+    }
+
+    .right-side-options{
+        padding-right: 20px;
+    }
+  }
+}
