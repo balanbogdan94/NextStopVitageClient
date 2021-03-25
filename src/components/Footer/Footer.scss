@@ -1,4 +1,64 @@
-.container{
-    width: 100%;
-    background-color: var(--color-text-main);
+.container {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	align-content: center;
+	justify-content: left;
+	flex-direction: column;
+	gap: 20px;
+}
+
+.social-link {
+	list-style: none;
+
+	li {
+		display: inline-block;
+		margin-right: 20px;
+
+		a {
+			&:active,
+			&:visited {
+				color: var(--color-text-main);
+			}
+
+			&:hover {
+				color: var(--color-text-secondary);
+			}
+		}
+	}
+
+	li:last-child {
+		margin-right: 0px;
+	}
+}
+
+.info-link {
+	list-style: none;
+	a {
+		text-decoration: none;
+
+		&:active,
+		&:visited {
+			color: var(--color-text-main);
+		}
+
+		&:hover {
+			color: var(--color-text-secondary);
+		}
+	}
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.divider {
+	width: 100%;
+	color: var(--color-text-main);
+}
+
+.contact-info {
+	list-style: none;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
