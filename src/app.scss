@@ -1,20 +1,32 @@
-* {
+html{
+  font-size: 16px;
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
   margin: 0;
   padding: 0;
 }
 
+body {
+  background-color: var(--color-background);
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.8 rem;
+}
+
+*, ::after, ::before {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
 :root {
-    font-family: 'Roboto', sans-serif;
 
     --color-background: #f2f2f2;
     --color-text-main: #313037;
     --color-text-secondary: #7F7A7C;
     --color-text-subtext: #999492;
-  }
-
-body{
-  background-color: var(--color-background);
-  margin: 0;
 }
 
 .main-container {
@@ -26,4 +38,5 @@ body{
 .main-content {
   flex: 1;
 }
+
 
