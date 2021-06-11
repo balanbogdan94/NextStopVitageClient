@@ -1,92 +1,34 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { NavLink } from "react-router-dom";
 import Cart from "./Cart";
 import "./Header.scss";
 import SearchBox from "./SearchBox";
 import { BiMenu, BiX } from "react-icons/bi";
-
+import { SideMenuContext } from "../../SideMenuContext";
+// import NavigationLinks from "./NavigationLinks";
 
 const Header = () => {
-
-const [isHamburgerOpen, setHamburgerOpen] = useState(false);
-
-const getNavStyle = () => {
-  let style = " nav-items"
-  style += isHamburgerOpen ? style+"--visible" : style+"--hidden"
-  return style;
-}
-
-const getHamburgerIcon: JSX.Element = isHamburgerOpen ? <BiX fontSize={30}/>: <BiMenu fontSize={30} />
+  const {isOpen, setIsOpen} = useContext(SideMenuContext);
 
   return (
-    <div className="header">
-      <div className="hamburger" onClick={()=> setHamburgerOpen(!isHamburgerOpen)}>
-        {getHamburgerIcon}
+    <div className="header-container">
+      <div
+        className="hamburger-menu"
+        onClick={() => setIsOpen(!isOpen)}
+      >
+        {isOpen ? <BiX fontSize={30} /> : <BiMenu fontSize={30} />}
       </div>
       <div className="logo">
         <NavLink to="/">
           <img src="images/logo.png" alt="Logo" />
         </NavLink>
       </div>
-      <nav className={getNavStyle()}>
-        <ul>
-          <NavLink
-            className="item"
-            to="/mens"
-            activeStyle={{
-              fontWeight: "bold",
-              fontSize: "20px"
-            }}
-          >
-            <li>MEN</li>
-          </NavLink>
-          <NavLink
-            className="item"
-            to="/womens"
-            activeStyle={{
-              fontWeight: "bold",
-              fontSize: "20px"
-            }}
-          >
-            <li>WOMENS</li>
-          </NavLink>
-          <NavLink
-            className="item"
-            to="/accessories"
-            activeStyle={{
-              fontWeight: "bold",
-              fontSize: "20px"
-            }}
-          >
-            <li>ACCESSORIES</li>
-          </NavLink>
-          <NavLink
-            className="item"
-            to="/shoes"
-            activeStyle={{
-              fontWeight: "bold",
-              fontSize: "20px"
-            }}
-          >
-            <li>SHOES</li>
-          </NavLink>
-          <NavLink
-            className="item item--sale"
-            to="/sale"
-            activeStyle={{
-              fontWeight: "bold",
-              fontSize: "20px"
-            }}
-          >
-            <li>SALE</li>
-          </NavLink>
-        </ul>
-      </nav>
-
-      <div className="right-side-options">
-          <SearchBox/>
-          <Cart />
-        <div className="language"></div>
+      {/* <NavigationLinks  /> */}
+      <div className="cart">
+        <Cart />
+      </div>
+      <div className="search-container">
+        <SearchBox />
       </div>
     </div>
   );

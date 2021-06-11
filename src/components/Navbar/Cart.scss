@@ -4,7 +4,7 @@
 
 
     .number-of-items{
-        border-radius: 50%;
+        border-radius: 60%;
         width: 20px;
         height: 20px;
     
@@ -13,12 +13,11 @@
         color: rgb(255, 255, 255);
         text-align: center;
         font-weight: bold;
+        font-size: 0.9em;
         position: absolute;
-        top: -15px;
-        right: -15px;
+        top: -13px;
+        right: -13px;
     
-
-
         &--visible{
             visibility: visible;
         }

@@ -1,18 +1,33 @@
 import React from "react";
 import "./app.scss";
-import { BrowserRouter as Router, Switch, Route, useLocation } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  useLocation,
+} from "react-router-dom";
 import Header from "./components/Navbar/Header";
-import Home  from "./components/Home/Home";
-import Footer from "./components/Footer/Footer"
+import Home from "./pages/Home/Home";
+import Footer from "./components/Footer/Footer";
+import SideBar from "./components/Navbar/SideBar";
+import SideMenuContext from "./SideMenuContext";
+
+
 
 function useQuery() {
-    return new URLSearchParams(useLocation().search);
-  }
+  return new URLSearchParams(useLocation().search);
+}
 
 function App() {
+
+
+
   return (
     <Router>
+      <SideMenuContext>
         <Header />
+        <SideBar />
+      </SideMenuContext>
       <Switch>
         <Route exact path="/">
           <Home />
@@ -23,10 +38,12 @@ function App() {
         <Route path="/womens">
           <Womens />
         </Route>
-        <Route path="/accessories"><Accessories/></Route>
+        <Route path="/accessories">
+          <Accessories />
+        </Route>
         <Route path="/search" component={Search}></Route>
       </Switch>
-        <Footer/>
+      <Footer />
     </Router>
   );
 }
@@ -47,11 +64,15 @@ const Accessories = () => {
 
 type TParams = { id: string };
 
-const Search = (text:TParams) => {
-    let query = useQuery();
-    let x = query.get("word")
-    return <div><h2>Here now</h2><h1>Serach word: {x}</h1></div>
-}
-
+const Search = (text: TParams) => {
+  let query = useQuery();
+  let x = query.get("word");
+  return (
+    <div>
+      <h2>Here now</h2>
+      <h1>Serach word: {x}</h1>
+    </div>
+  );
+};
 
 export default App;
