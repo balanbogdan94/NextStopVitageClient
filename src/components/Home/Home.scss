@@ -1,9 +1,18 @@
 .mainImage {
+    padding-top: 20px;
     width: 100%;
   img {
-    width: auto;
-    height: auto;
+    max-height: 50vh;
+    width: 90%;
     object-fit: cover;
-    margin: 40px;
+    object-position: bottom;
+    margin: auto;
+    display: block;
+    opacity: 1;
+    transition: .5s ease;
+
+    &:hover{
+      opacity: 0.3;
+    }
   }
 }

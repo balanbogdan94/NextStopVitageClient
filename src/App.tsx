@@ -2,31 +2,37 @@ import React from "react";
 import "./app.scss";
 import { BrowserRouter as Router, Switch, Route, useLocation } from "react-router-dom";
 import Header from "./components/Navbar/Header";
-import Home  from "./components/Home/Home";
+import Home from "./components/Home/Home";
 import Footer from "./components/Footer/Footer"
 
 function useQuery() {
-    return new URLSearchParams(useLocation().search);
-  }
+  return new URLSearchParams(useLocation().search);
+}
 
 function App() {
   return (
     <Router>
+      <div className="main-container">
         <Header />
-      <Switch>
-        <Route exact path="/">
-          <Home />
-        </Route>
-        <Route path="/mens">
-          <Mens />
-        </Route>
-        <Route path="/womens">
-          <Womens />
-        </Route>
-        <Route path="/accessories"><Accessories/></Route>
-        <Route path="/search" component={Search}></Route>
-      </Switch>
-        <Footer/>
+        <div className="main-content">
+          <Switch>
+            <Route exact path="/">
+              <Home />
+            </Route>
+            <Route path="/mens">
+              <Mens />
+            </Route>
+            <Route path="/womens">
+              <Womens />
+            </Route>
+            <Route path="/accessories"><Accessories /></Route>
+            <Route path="/search" component={Search}></Route>
+          </Switch>
+        </div>
+
+        <Footer />
+      </div>
+
     </Router>
   );
 }
@@ -47,10 +53,10 @@ const Accessories = () => {
 
 type TParams = { id: string };
 
-const Search = (text:TParams) => {
-    let query = useQuery();
-    let x = query.get("word")
-    return <div><h2>Here now</h2><h1>Serach word: {x}</h1></div>
+const Search = (text: TParams) => {
+  let query = useQuery();
+  let x = query.get("word")
+  return <div><h2>Here now</h2><h1>Serach word: {x}</h1></div>
 }
 
 
