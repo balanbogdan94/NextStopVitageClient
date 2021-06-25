@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import "./SearchBox.scss"
 import { Redirect, useHistory } from "react-router-dom";
 import { BiSearch } from "react-icons/bi";
-import { SideMenuContext } from "../../SideMenuContext";
+import { SideMenuContext } from "../../context/SideMenuContext";
 
 const SearchBox = () => {
   const {setIsOpen} = useContext(SideMenuContext);

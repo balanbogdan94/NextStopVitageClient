@@ -6,12 +6,9 @@ import {
   Route,
   useLocation,
 } from "react-router-dom";
-import Header from "./components/Navbar/Header";
 import Home from "./pages/Home/Home";
-import Footer from "./components/Footer/Footer";
-import SideBar from "./components/Navbar/SideBar";
-import SideMenuContext from "./SideMenuContext";
-
+import Authorization from "./pages/authorization/Authorization";
+import { MainLayout } from "./layouts/MainLayout";
 
 
 function useQuery() {
@@ -19,35 +16,36 @@ function useQuery() {
 }
 
 function App() {
-
-
-
   return (
     <Router>
-      <div className="main-container">
-        <SideMenuContext>
-          <Header />
-          <SideBar />
-        </SideMenuContext>
-        <div className="main-content">
-          <Switch>
-            <Route exact path="/">
-              <Home />
-            </Route>
-            <Route path="/mens">
-              <Mens />
-            </Route>
-            <Route path="/womens">
-              <Womens />
-            </Route>
-            <Route path="/accessories">
-              <Accessories />
-            </Route>
-            <Route path="/search" component={Search}></Route>
-          </Switch>
-        </div>
-        <Footer />
-      </div>
+      <Switch>
+
+        <Route exact path="/">
+          <MainLayout>
+            <Home />
+          </MainLayout>
+        </Route>
+
+        <Route path="/mens">
+          <MainLayout>
+            <Mens />
+          </MainLayout>
+        </Route>
+
+        <Route path="/womens">
+          <Womens />
+        </Route>
+
+        <Route path="/accessories">
+          <MainLayout>
+            <Accessories />
+          </MainLayout>
+        </Route>
+
+        <Route path="/search" component={Search}></Route>
+        <Route path="/admin/login" component={Authorization} />
+        <Route path="*"><div>Not found</div></Route>
+      </Switch>
     </Router>
   );
 }

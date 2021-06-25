@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { SideMenuContext } from "../../SideMenuContext";
+import { SideMenuContext } from "../../context/SideMenuContext";
 import NavigationLinks from "./NavigationLinks";
 import "./SideBar.scss";
 

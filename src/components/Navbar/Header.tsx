@@ -4,7 +4,7 @@ import Cart from "./Cart";
 import "./Header.scss";
 import SearchBox from "./SearchBox";
 import { BiMenu, BiX } from "react-icons/bi";
-import { SideMenuContext } from "../../SideMenuContext";
+import { SideMenuContext } from "../../context/SideMenuContext";
 // import NavigationLinks from "./NavigationLinks";
 
 const Header = () => {
