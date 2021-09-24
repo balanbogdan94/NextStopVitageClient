@@ -10,6 +10,8 @@ import Home from './pages/Home/Home';
 import Login from './pages/Admin/Login';
 import Dashboard from './pages/Admin/Dashboard';
 import UserLayout from './layout/UserLayout';
+import Authorization from './pages/authorization/Authorization';
+import { MainLayout } from './layouts/MainLayout';
 
 function useQuery() {
 	return new URLSearchParams(useLocation().search);
@@ -46,6 +48,9 @@ function App() {
 				</Route>
 				<Route path="/admin/login" component={Login} />
 				<Route path="/admin" component={Dashboard} />
+				<Route path="*">
+					<div>Not found</div>
+				</Route>
 			</Switch>
 		</Router>
 	);
