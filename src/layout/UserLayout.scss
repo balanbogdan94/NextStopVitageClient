@@ -1,0 +1,9 @@
+.user-layout-container {
+	display: flex;
+	min-height: 100vh;
+	flex-direction: column;
+
+	&_content {
+		flex: 1;
+	}
+}
