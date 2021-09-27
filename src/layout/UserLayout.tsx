@@ -2,7 +2,7 @@ import React from 'react';
 import Footer from '../components/Footer/Footer';
 import Header from '../components/Navbar/Header';
 import SideBar from '../components/Navbar/SideBar';
-import SideMenuContext from '../SideMenuContext';
+import SideMenuContext from '../context/SideMenuContext';
 import './UserLayout.scss';
 
 const UserLayout = ({ children }) => {
