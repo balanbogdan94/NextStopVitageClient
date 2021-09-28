@@ -10,8 +10,8 @@ import Home from './pages/Home/Home';
 import Login from './pages/Admin/Login';
 import Dashboard from './pages/Admin/Dashboard';
 import UserLayout from './layout/UserLayout';
-import Authorization from './pages/authorization/Authorization';
-import { MainLayout } from './layouts/MainLayout';
+import { AuthorizationProvider } from './context/AuthorizationContext';
+import ProtectedRoute from './components/ProtectedRoute';
 
 function useQuery() {
 	return new URLSearchParams(useLocation().search);
@@ -46,8 +46,10 @@ function App() {
 						<Search id={'23'} />
 					</UserLayout>
 				</Route>
-				<Route path="/admin/login" component={Login} />
-				<Route path="/admin" component={Dashboard} />
+				<AuthorizationProvider>
+					<Route path="/admin/login" component={Login} />
+					<ProtectedRoute exact path="/admin" component={Dashboard} />
+				</AuthorizationProvider>
 				<Route path="*">
 					<div>Not found</div>
 				</Route>
