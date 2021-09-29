@@ -1,11 +1,16 @@
 import React from 'react';
+import { useHistory } from 'react-router';
 import { useAuthorization } from '../../context/AuthorizationContext';
 
 const Dashboard = () => {
 	const { logOut } = useAuthorization();
+	const history = useHistory();
 	async function signOutPressed(e) {
 		e.preventDefault();
-		await logOut();
+		if (logOut) {
+			await logOut();
+			history.push('/admin/login');
+		}
 	}
 
 	return (

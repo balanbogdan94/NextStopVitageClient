@@ -7,7 +7,7 @@ import {
 	useLocation,
 } from 'react-router-dom';
 import Home from './pages/Home/Home';
-import Login from './pages/Admin/Login';
+import AuthentificationPage from './pages/Admin/AuthentificationPage';
 import Dashboard from './pages/Admin/Dashboard';
 import UserLayout from './layout/UserLayout';
 import { AuthorizationProvider } from './context/AuthorizationContext';
@@ -47,7 +47,7 @@ function App() {
 					</UserLayout>
 				</Route>
 				<AuthorizationProvider>
-					<Route path="/admin/login" component={Login} />
+					<Route path="/admin/login" component={AuthentificationPage} />
 					<ProtectedRoute exact path="/admin" component={Dashboard} />
 				</AuthorizationProvider>
 				<Route path="*">

@@ -1,28 +1,34 @@
-import { getAuth, signInWithEmailAndPassword, signOut } from 'firebase/auth';
-import { getFirebaseError } from '../../exceptions/firebaseErrorFactory';
+import {
+	getAuth,
+	signInWithEmailAndPassword,
+	signOut,
+	UserCredential,
+} from 'firebase/auth';
+import { getFirebaseError } from '../exception/firebaseErrorFactory';
 import firebaseApp from '../firebase';
 import { User } from './../../model/user';
 
 const auth = getAuth(firebaseApp);
 
-async function signIn(email, pass): Promise<User> {
+async function signInFirebase(email, pass): Promise<User> {
 	try {
-		const { user } = await signInWithEmailAndPassword(auth, email, pass);
-		const userDTO: User = {
-			email: user.email!,
-			uid: user.uid,
-			displayName: user.displayName,
+		const { user: userFromFirebase }: UserCredential =
+			await signInWithEmailAndPassword(auth, email, pass);
+		const user: User = {
+			email: userFromFirebase.email!,
+			uid: userFromFirebase.uid,
+			displayName: userFromFirebase.displayName,
 		};
-		return userDTO;
+		return user;
 	} catch (error: any) {
 		throw getFirebaseError(error);
 	}
 }
 
-async function signOutUser(): Promise<void> {
+async function signOutFirebase(): Promise<void> {
 	await signOut(auth).catch((exception) => {
 		throw exception;
 	});
 }
 
-export { signIn, signOutUser };
+export { signInFirebase, signOutFirebase };
