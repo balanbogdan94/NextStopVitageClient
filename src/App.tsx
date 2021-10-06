@@ -12,6 +12,7 @@ import Dashboard from './pages/Admin/Dashboard';
 import UserLayout from './layout/UserLayout';
 import { AuthorizationProvider } from './context/AuthorizationContext';
 import ProtectedRoute from './components/ProtectedRoute';
+import AdminLayout from './layout/AdminLayout';
 
 function useQuery() {
 	return new URLSearchParams(useLocation().search);
@@ -48,7 +49,7 @@ function App() {
 				</Route>
 				<AuthorizationProvider>
 					<Route path="/admin/login" component={AuthentificationPage} />
-					<ProtectedRoute exact path="/admin" component={Dashboard} />
+					<ProtectedRoute exact path="/admin" component={AdminDashboard} />
 				</AuthorizationProvider>
 				<Route path="*">
 					<div>Not found</div>
@@ -59,6 +60,14 @@ function App() {
 }
 
 // TODO: Remove when pages are implemented
+
+const AdminDashboard = () => {
+	return (
+		<AdminLayout>
+			<Dashboard />
+		</AdminLayout>
+	);
+};
 
 const Mens = () => {
 	return <h1>Mens</h1>;

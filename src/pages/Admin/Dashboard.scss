@@ -1,0 +1,53 @@
+.products-container {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	padding: 1.5rem 1rem;
+	gap: 1.5rem;
+	margin: 0 auto;
+	&__blob {
+		position: absolute;
+		z-index: -1;
+		left: 0;
+		top: 0;
+	}
+
+	&__actions {
+		display: flex;
+		flex-direction: row;
+
+		button {
+			background: #ffffff;
+			border: 0.5px solid #000000;
+			box-sizing: border-box;
+			box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+			border-radius: 10px;
+			min-height: 2rem;
+		}
+
+		&__add-button {
+			max-width: 10rem;
+			min-width: 150px;
+		}
+
+		&__delete-button {
+			color: red;
+		}
+
+		&--selected {
+			display: flex;
+			gap: 1rem;
+			margin-right: 0;
+			margin-left: auto;
+
+			button {
+				min-width: 75px;
+			}
+		}
+
+		&--hidden {
+			display: block;
+			visibility: hidden;
+		}
+	}
+}
