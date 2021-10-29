@@ -1,6 +1,7 @@
 .admin-layout-container {
 	position: relative;
 	min-height: 100vh;
+	overflow-x: hidden;
 	.hamburger-container {
 		background-color: black;
 		color: white;
@@ -10,35 +11,18 @@
 		position: sticky;
 		top: 0;
 
-		&__wave {
-			width: 100%;
-			min-height: 20px;
-			max-height: 50px;
-		}
-
 		&__button {
 			cursor: pointer;
 		}
-	}
-
-	.background-bottom {
-		position: absolute;
-		bottom: 0;
-		width: 100%;
-		min-height: 50px;
-		max-height: 100px;
-		z-index: 6;
 	}
 }
 
 @media screen and (min-width: 768px) {
 	.admin-layout-container {
 		display: grid;
-		grid-template-columns: 25% 1fr;
+		grid-template-columns: 200px 1fr;
 		grid-template-rows: auto;
-		grid-template-areas:
-			'sidebar main-content'
-			'footer footer';
+		grid-template-areas: 'sidebar main-content';
 
 		.hamburger-container {
 			display: none;
@@ -46,16 +30,15 @@
 
 		.content {
 			grid-area: main-content;
+			overflow: hidden;
+			padding: 0 1rem;
+			margin: 0 auto;
 		}
 
 		.sidebar {
-			position: relative;
+			position: fixed;
 			grid-area: sidebar;
-			max-width: 300px;
-		}
-
-		.background-bottom {
-			grid-area: 1/1 2/2;
+			width: 200px;
 		}
 	}
 }

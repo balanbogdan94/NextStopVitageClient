@@ -30,3 +30,8 @@ body {
 	--color-text-secondary: #7f7a7c;
 	--color-text-subtext: #999492;
 }
+
+textarea:focus,
+input:focus {
+	outline: none;
+}

@@ -1,80 +1,44 @@
 import React from 'react';
 import { useTable, useRowSelect } from 'react-table'
 import './ProductTable.scss'
+import { BiCheck, BiX } from "react-icons/bi";
 
-const ProductTable = ({onRowSelected}) => {
-	const data = React.useMemo(
-		() => [
-			{
-				col1: 'LORO PIANA SPORT COAT',
-				col2: 'Jacket',
-				col3: 'Hot summer',
-				col4: 'Stussy',
-				col5: 'M',
-				col6: '266'
-			},
-			{
-				col1: 'LORO PIANA SPORT COAT',
-				col2: 'Jacket',
-				col3: 'Hot summer',
-				col4: 'Stussy',
-				col5: 'M',
-				col6: '266'
-			},
-			{
-				col1: 'LORO PIANA SPORT COAT',
-				col2: 'Jacket',
-				col3: 'Hot summer',
-				col4: 'Stussy',
-				col5: 'M',
-				col6: '266'
-			},
-			{
-				col1: 'LORO PIANA SPORT COAT',
-				col2: 'Jacket',
-				col3: 'Hot summer',
-				col4: 'Stussy',
-				col5: 'M',
-				col6: '266'
-			},
-			{
-				col1: 'LORO PIANA SPORT COAT',
-				col2: 'Jacket',
-				col3: 'Hot summer',
-				col4: 'Stussy',
-				col5: 'M',
-				col6: '266'
-			}
-		],
-		[],
-	);
+const ProductTable = ({onRowSelected, data}) => {
 
 	const columns = React.useMemo(
 		() => [
 			{
 				Header: 'Name',
-				accessor: 'col1', // accessor is the "key" in the data
-			},
-			{
-				Header: 'Category',
-				accessor: 'col2',
+				accessor: 'title', // accessor is the "key" in the data
 			},
 			{
 				Header: 'Drop',
-				accessor: 'col3',
+				accessor: 'drop',
 			},
 			{
+				Header: 'Category',
+				accessor: 'category',
+			},
+
+			{
 				Header: 'Brand',
-				accessor: 'col4',
+				accessor: 'brand',
 			},
 			{
 				Header: 'Size',
-				accessor: 'col5',
+				accessor: 'sizes',
 			},
 			{
-				Header: 'Price',
-				accessor: 'col6',
+				id: 'sale',
+				Header: 'Sale',
+				accessor: d => d.isOnSale ? <BiCheck fontSize={18}/> : <BiX fontSize={18}/>
 			},
+			{
+				Header: 'Price \n (RON)',
+				accessor: 'price',
+				
+			},
+
 		],
 		[],
 	);
@@ -104,29 +68,10 @@ const ProductTable = ({onRowSelected}) => {
 		rows,
 		prepareRow,
 		selectedFlatRows,
-		state: { selectedRowIds },
 	  } = useTable(
 		{
 		  columns,
-		  data,
-		  stateReducer: (newState, action, prevState) => {
-			  let isSameRowSelected = false;
-			  if (action.type === "toggleRowSelected") {
-				  let value = {
-					[action.id]: true
-				  }
-				  let prevValueIndex = Object.keys(prevState.selectedRowIds)
-				  if(prevValueIndex && prevValueIndex[0] && prevValueIndex[0] === action.id){
-					  value= {}
-					  isSameRowSelected = true;
-				  }
-				newState.selectedRowIds = value
-				
-			  }
-			  onRowSelected(!isSameRowSelected)
-	
-			  return newState;
-		  },
+		  data
 		},
 		useRowSelect,
 		hooks => {
@@ -134,16 +79,12 @@ const ProductTable = ({onRowSelected}) => {
 			// Let's make a column for selection
 			{
 			  id: 'selection',
-			  // The header can use the table's getToggleAllRowsSelectedProps method
-			  // to render a checkbox
 			  Header: () => (
 				<div>
 				  <b>Select</b>
 				</div>
 			  ),
-			  // The cell can use the individual row's getToggleRowSelectedProps method
-			  // to the render a checkbox
-			  Cell: ({ row }) => (
+			  Cell: ({ row, toggleRowSelected, toggleAllRowSelected }) => (
 				<div>
 				  <IndeterminateCheckbox {...row.getToggleRowSelectedProps()} />
 				</div>
@@ -153,6 +94,11 @@ const ProductTable = ({onRowSelected}) => {
 		  ])
 		}
 	  )
+
+	  React.useEffect(() => {
+		  const selectedRowsIds = selectedFlatRows.map(row => row.original.id)
+		  onRowSelected(selectedRowsIds)
+	  }, [selectedFlatRows])
 
 	return (
 		<table className="table-container"{...getTableProps()}>

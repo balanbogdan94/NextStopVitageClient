@@ -18,6 +18,7 @@
     "noImplicitAny": false,
     "resolveJsonModule": true,
     "isolatedModules": true,
+    "downlevelIteration": true,
     "noEmit": true,
     "jsx": "react-jsx"
   },

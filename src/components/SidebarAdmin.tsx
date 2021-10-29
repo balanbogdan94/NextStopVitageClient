@@ -3,8 +3,8 @@ import './SidebarAdmin.scss';
 
 const SidebarAdmin = ({ isOpen }) => {
 	const getStyle = isOpen
-		? 'side-bar-container side-bar-container--visible'
-		: 'side-bar-container';
+		? 'admin-side-bar-container admin-side-bar-container--visible'
+		: 'admin-side-bar-container';
 
 	return (
 		<div className={getStyle}>
