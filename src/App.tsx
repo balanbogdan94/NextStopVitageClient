@@ -13,6 +13,7 @@ import UserLayout from './layout/UserLayout';
 import { AuthorizationProvider } from './context/AuthorizationContext';
 import ProtectedRoute from './components/ProtectedRoute';
 import AdminLayout from './layout/AdminLayout';
+import Products from './pages/Product/Product';
 
 function useQuery() {
 	return new URLSearchParams(useLocation().search);
@@ -29,7 +30,7 @@ function App() {
 				</Route>
 				<Route path="/mens">
 					<UserLayout>
-						<Mens />
+						<Products />
 					</UserLayout>
 				</Route>
 				<Route path="/womens">

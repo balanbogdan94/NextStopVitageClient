@@ -1,6 +1,8 @@
 import { addBrand } from '../firebase/api/brand';
 import { addInStorage, deleteImage } from '../firebase/api/storage';
+import { Product } from '../model/product';
 import { TableProduct } from '../model/productForTable';
+import { ProductForUser } from '../model/productUser';
 import {
 	addProductInFirebase,
 	deleteProduct,
@@ -35,6 +37,28 @@ export async function getProducts(): Promise<TableProduct[]> {
 	});
 
 	return productsForTable;
+}
+
+export async function getProductsForUser(): Promise<ProductForUser[]> {
+	let _products = await getAllProducts();
+	let products: ProductForUser[] = _products.map((product) => {
+		const { id, title, imageURL, brand, price, newPrice } = product;
+		let discount: number | undefined;
+		const imageUrl = imageURL[0];
+		if (newPrice) discount = ((price - newPrice) / price) * 100;
+
+		return {
+			id,
+			title,
+			imageUrl,
+			brand,
+			price,
+			priceAfterReduction: newPrice,
+			discount,
+		};
+	});
+
+	return products;
 }
 
 export async function deleteProducts(ids: string[]): Promise<void> {

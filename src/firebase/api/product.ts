@@ -56,7 +56,7 @@ export async function getAllProducts(): Promise<Product[]> {
 			price: data.price,
 			drop: data.drop,
 			newPrice: data.newPrice,
-			imageURL: data.imageURL,
+			imageURL: data.imageUrls,
 		});
 	});
 	return products;
