@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 import { useAuthorization } from '../../context/AuthorizationContext';
 import WrongCredentialsException from '../../exceptions/wrongCredentialsException';
 import './AuthentificationPage.scss';
@@ -9,14 +9,14 @@ const AuthentificationPage = () => {
 	const [pass, setPass] = useState();
 	const [errorMessage, setErrorMessage] = useState<string>('');
 	const { logIn } = useAuthorization();
-	const history = useHistory();
+	const navigate = useNavigate();
 
 	async function logInUser(e) {
 		e.preventDefault();
 		if (logIn) {
 			try {
 				await logIn(user, pass);
-				history.push('/admin');
+				navigate('/admin');
 			} catch (error) {
 				if (error instanceof WrongCredentialsException) {
 					setErrorMessage(error.message);
@@ -38,41 +38,40 @@ const AuthentificationPage = () => {
 	}
 
 	return (
-		<div className="authentification-container">
+		<div className='authentification-container'>
 			<img
-				className="authentification-container__logo"
-				src="/images/logo.png"
-				alt="logo"
+				className='authentification-container__logo'
+				src='/images/logo.png'
+				alt='logo'
 			/>
-			<form className="authentification-container__form" onSubmit={logInUser}>
+			<form className='authentification-container__form' onSubmit={logInUser}>
 				<section
-					className="authentification-container__form__error"
+					className='authentification-container__form__error'
 					style={{
 						display: errorMessage ? 'block' : 'none',
-					}}
-				>
+					}}>
 					<p>{errorMessage}</p>
 				</section>
 				<label>
 					Username:
 					<input
-						className="authentification-container__form__input"
-						type="email"
+						className='authentification-container__form__input'
+						type='email'
 						onChange={onEmailChanged}
 					/>
 				</label>
 				<label>
 					Password:
 					<input
-						className="authentification-container__form__input"
+						className='authentification-container__form__input'
 						minLength={6}
-						type="password"
+						type='password'
 						onChange={onPassChanged}
 					/>
 				</label>
 				<input
-					className="authentification-container__form__submit"
-					type="submit"
+					className='authentification-container__form__submit'
+					type='submit'
 				/>
 			</form>
 		</div>

@@ -5,6 +5,7 @@ import './Header.scss';
 import SearchBox from './SearchBox';
 import { BiMenu, BiX } from 'react-icons/bi';
 import { SideMenuContext } from '../../context/SideMenuContext';
+import logo from '../../assets/logo.png';
 // import NavigationLinks from "./NavigationLinks";
 
 const Header = () => {
@@ -22,20 +23,20 @@ const Header = () => {
 	}
 
 	return (
-		<div className="header-container">
-			<div className="hamburger-menu" onClick={onHamburgerPressed}>
+		<div className='header-container'>
+			<div className='hamburger-menu' onClick={onHamburgerPressed}>
 				{isOpen ? <BiX fontSize={30} /> : <BiMenu fontSize={30} />}
 			</div>
-			<div className="logo">
-				<NavLink to="/">
-					<img src="images/logo.png" alt="Logo" />
+			<div className='logo'>
+				<NavLink to='/'>
+					<img src={logo} alt='Logo' />
 				</NavLink>
 			</div>
 			{/* <NavigationLinks  /> */}
-			<div className="cart">
+			<div className='cart'>
 				<Cart />
 			</div>
-			<div className="search-container">
+			<div className='search-container'>
 				<SearchBox />
 			</div>
 		</div>

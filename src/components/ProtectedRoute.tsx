@@ -1,17 +1,9 @@
-import React from 'react';
-import { Route, Redirect } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import { useAuthorization } from '../context/AuthorizationContext';
 
-function ProtectedRoute({ component: Component, ...rest }) {
+function ProtectedRoute({ children }: { children: JSX.Element }) {
 	const { user } = useAuthorization();
-	return (
-		<Route
-			{...rest}
-			render={(props) =>
-				user ? <Component {...props} /> : <Redirect to="/admin/login" />
-			}
-		/>
-	);
+	return user ? children : <Navigate to='/login' />;
 }
 
 export default ProtectedRoute;

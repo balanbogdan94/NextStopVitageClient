@@ -7,6 +7,8 @@ import {
 	deleteDoc,
 	doc,
 	getDoc,
+	query,
+	where,
 } from 'firebase/firestore';
 import { Product } from '../../model/product';
 
@@ -36,16 +38,44 @@ export async function addProductInFirebase(product, imageUrls): Promise<void> {
 	}
 }
 
-export async function getAllProducts(): Promise<Product[]> {
-	const querySnapshot = await getDocs(collection(db, 'products'));
+export async function getAllProducts(
+	category?: string | null,
+): Promise<Product[]> {
+	let querySnapshot;
+	if (category) {
+		const citiesRef = collection(db, 'products');
+		const q = query(citiesRef, where('category', '==', category));
+		querySnapshot = await getDocs(q);
+	} else {
+		querySnapshot = await getDocs(collection(db, 'products'));
+	}
 	let products: Product[] = [];
 	querySnapshot.forEach((doc) => {
-		// products.push({
-		//     id: doc.id,
-		//     title: doc.data().tit
-		// })
-		// doc.data() is never undefined for query doc snapshots
-		console.log(doc.id, ' => ', doc.data());
+		const data = doc.data();
+		products.push({
+			id: doc.id,
+			title: data.title,
+			category: data.category,
+			brand: data.brand,
+			sizes: data.sizess,
+			price: data.price,
+			drop: data.drop,
+			newPrice: data.newPrice,
+			imageURL: data.imageUrls,
+		});
+	});
+	return products;
+}
+
+export async function getAllSaleProducts(
+	category?: string | null,
+): Promise<Product[]> {
+	let querySnapshot;
+	const citiesRef = collection(db, 'products');
+	const q = query(citiesRef, where('isOnSale', '==', true));
+	querySnapshot = await getDocs(q);
+	let products: Product[] = [];
+	querySnapshot.forEach((doc) => {
 		const data = doc.data();
 		products.push({
 			id: doc.id,

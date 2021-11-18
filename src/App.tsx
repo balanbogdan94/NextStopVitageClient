@@ -1,11 +1,6 @@
 import React from 'react';
 import './app.scss';
-import {
-	BrowserRouter as Router,
-	Switch,
-	Route,
-	useLocation,
-} from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home/Home';
 import AuthentificationPage from './pages/Admin/AuthentificationPage';
 import Dashboard from './pages/Admin/Dashboard';
@@ -13,86 +8,71 @@ import UserLayout from './layout/UserLayout';
 import { AuthorizationProvider } from './context/AuthorizationContext';
 import ProtectedRoute from './components/ProtectedRoute';
 import AdminLayout from './layout/AdminLayout';
-import Products from './pages/Product/Product';
-
-function useQuery() {
-	return new URLSearchParams(useLocation().search);
-}
+import Products from './pages/Product/Products';
+import Product from './pages/Product/Product';
 
 function App() {
 	return (
 		<Router>
-			<Switch>
-				<Route exact path="/">
-					<UserLayout>
-						<Home />
-					</UserLayout>
-				</Route>
-				<Route path="/mens">
-					<UserLayout>
-						<Products />
-					</UserLayout>
-				</Route>
-				<Route path="/womens">
-					<UserLayout>
-						<Womens />
-					</UserLayout>
-				</Route>
-				<Route path="/accessories">
-					<UserLayout>
-						<Accessories />
-					</UserLayout>
-				</Route>
-				<Route path="/search">
-					<UserLayout>
-						<Search id={'23'} />
-					</UserLayout>
-				</Route>
-				<AuthorizationProvider>
-					<Route path="/admin/login" component={AuthentificationPage} />
-					<ProtectedRoute exact path="/admin" component={AdminDashboard} />
-				</AuthorizationProvider>
-				<Route path="*">
-					<div>Not found</div>
-				</Route>
-			</Switch>
+			<AuthorizationProvider>
+				<Routes>
+					<Route
+						path='/'
+						element={
+							<UserLayout>
+								<Home />
+							</UserLayout>
+						}></Route>
+					<Route path='/products' element={<ProductsPage />} />
+					<Route
+						path='products/sale'
+						element={
+							<UserLayout>
+								<Products onlyOnSale={true} />
+							</UserLayout>
+						}
+					/>
+					<Route path='products/:productId' element={<ProductPage />} />
+
+					<Route path='/login' element={<AuthentificationPage />} />
+					<Route
+						path='/admin'
+						element={
+							<ProtectedRoute>
+								<AdminDashboard />
+							</ProtectedRoute>
+						}
+					/>
+
+					<Route path='*'>
+						<div>Not found</div>
+					</Route>
+				</Routes>
+			</AuthorizationProvider>
 		</Router>
 	);
 }
 
 // TODO: Remove when pages are implemented
 
-const AdminDashboard = () => {
+function AdminDashboard() {
 	return (
 		<AdminLayout>
 			<Dashboard />
 		</AdminLayout>
 	);
-};
+}
 
-const Mens = () => {
-	return <h1>Mens</h1>;
-};
+const ProductsPage = () => (
+	<UserLayout>
+		<Products />
+	</UserLayout>
+);
 
-const Womens = () => {
-	return <h1>Womens</h1>;
-};
-
-const Accessories = () => {
-	return <section>Accessories</section>;
-};
-
-type TParams = { id: string };
-
-const Search = (text: TParams) => {
-	let query = useQuery();
-	let x = query.get('word');
-	return (
-		<div>
-			<h2>Here now</h2>
-			<h1>Serach word: {x}</h1>
-		</div>
-	);
-};
+const ProductPage = () => (
+	<UserLayout>
+		<Product />
+	</UserLayout>
+);
 
 export default App;

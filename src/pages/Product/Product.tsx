@@ -1,23 +1,24 @@
 import React from 'react';
+import { useParams } from 'react-router-dom';
 import ProductCard from '../../components/ProductCard';
 import { ProductForUser } from '../../model/productUser';
-import { getProductsForUser } from '../../service/ProductService';
-import './Product.scss';
+import { getProductForUser } from '../../service/ProductService';
 
-const Products = () => {
-	const [products, setProducts] = React.useState<ProductForUser[]>([]);
+const Product = () => {
+	let params = useParams();
+	const [product, setProduct] = React.useState<ProductForUser>();
 
 	React.useEffect(() => {
-		getProductsForUser().then((data) => setProducts(data));
+		if (params && params.productId) {
+			getProductForUser(params.productId).then((data) => setProduct(data));
+		}
 	}, []);
-
+	if (!product) return <h1>Loading...</h1>;
 	return (
-		<div className="products-overview">
-			{products.map((p: ProductForUser) => (
-				<ProductCard product={p} />
-			))}
+		<div>
+			<ProductCard product={product} />
 		</div>
 	);
 };
 
-export default Products;
+export default Product;

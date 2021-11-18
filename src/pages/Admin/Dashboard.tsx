@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useHistory } from 'react-router';
+
 import ProductTable from '../../components/ProductTable';
 import { useAuthorization } from '../../context/AuthorizationContext';
 import { BiEdit, BiTrash } from 'react-icons/bi';
@@ -8,10 +8,11 @@ import AddProductForm from './AddProductForm';
 import { Product } from '../../model/product';
 import { deleteProducts, getProducts } from '../../service/ProductService';
 import { TableProduct } from '../../model/productForTable';
+import { useNavigate } from 'react-router';
 
 const Dashboard = () => {
 	const { logOut } = useAuthorization();
-	const history = useHistory();
+	const navigate = useNavigate();
 	const [selectedRows, setSelectedRows] = React.useState<string[]>([]);
 	const [isOpen, setIsOpen] = useState(false);
 	const [products, setProducts] = useState<TableProduct[]>([]);
@@ -26,7 +27,7 @@ const Dashboard = () => {
 		e.preventDefault();
 		if (logOut) {
 			await logOut();
-			history.push('/admin/login');
+			navigate('/admin/login');
 		}
 	}
 
@@ -65,13 +66,12 @@ const Dashboard = () => {
 					onSubmitCallback={onSubmit}
 				/>
 			)}
-			<div className="products-container">
+			<div className='products-container'>
 				<h1>My Products</h1>
-				<div className="products-container__actions">
+				<div className='products-container__actions'>
 					<button
-						className="products-container__actions__add-button"
-						onClick={onAddProductPressed}
-					>
+						className='products-container__actions__add-button'
+						onClick={onAddProductPressed}>
 						+
 					</button>
 					<div
@@ -79,15 +79,13 @@ const Dashboard = () => {
 							selectedRows.length > 0
 								? 'products-container__actions--selected'
 								: 'products-container__actions--hidden'
-						}
-					>
-						<button className="products-container__actions__edit-button">
+						}>
+						<button className='products-container__actions__edit-button'>
 							<BiEdit fontSize={20} />
 						</button>
 						<button
-							className="products-container__actions__delete-button"
-							onClick={deleteSelectedItems}
-						>
+							className='products-container__actions__delete-button'
+							onClick={deleteSelectedItems}>
 							<BiTrash fontSize={20} />
 						</button>
 					</div>

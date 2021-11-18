@@ -10,19 +10,8 @@ type ContextProps = {
 
 const AuthorizationContext = createContext<Partial<ContextProps>>({});
 
-export function useAuthorization() {
-	const context = useContext(AuthorizationContext);
-
-	if (context === undefined) {
-		throw new Error(
-			'useAuthorization must be used within a AuthorizationProvider',
-		);
-	}
-	return context;
-}
-
 export function AuthorizationProvider({ children }): ReactElement {
-	const [user, setUser] = React.useState<User | undefined | null>();
+	const [user, setUser] = React.useState<User | null>();
 
 	async function logIn(user, pass): Promise<void> {
 		try {
@@ -53,4 +42,9 @@ export function AuthorizationProvider({ children }): ReactElement {
 			{children}
 		</AuthorizationContext.Provider>
 	);
+}
+
+export function useAuthorization() {
+	const context = useContext(AuthorizationContext);
+	return context;
 }

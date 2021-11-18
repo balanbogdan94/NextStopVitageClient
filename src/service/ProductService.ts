@@ -7,6 +7,7 @@ import {
 	addProductInFirebase,
 	deleteProduct,
 	getAllProducts,
+	getAllSaleProducts,
 	getProduct,
 } from './../firebase/api/product';
 
@@ -39,8 +40,13 @@ export async function getProducts(): Promise<TableProduct[]> {
 	return productsForTable;
 }
 
-export async function getProductsForUser(): Promise<ProductForUser[]> {
-	let _products = await getAllProducts();
+export async function getProductsForUser(
+	category: string | null,
+	onSale = false,
+): Promise<ProductForUser[]> {
+	let _products = onSale
+		? await getAllSaleProducts(category)
+		: await getAllProducts(category);
 	let products: ProductForUser[] = _products.map((product) => {
 		const { id, title, imageURL, brand, price, newPrice } = product;
 		let discount: number | undefined;
@@ -59,6 +65,30 @@ export async function getProductsForUser(): Promise<ProductForUser[]> {
 	});
 
 	return products;
+}
+
+export async function getProductForUser(
+	productId: string,
+): Promise<ProductForUser> {
+	let product = await getProduct(productId);
+	if (product) {
+		const { id, title, imageURL, brand, price, newPrice } = product;
+		let discount: number | undefined;
+		const imageUrl = imageURL[0];
+		if (newPrice) discount = ((price - newPrice) / price) * 100;
+
+		return {
+			id,
+			title,
+			imageUrl,
+			brand,
+			price,
+			priceAfterReduction: newPrice,
+			discount,
+		};
+	}
+
+	throw Error('Id not exists');
 }
 
 export async function deleteProducts(ids: string[]): Promise<void> {
