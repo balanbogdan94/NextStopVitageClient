@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 import Cart from './Cart';
 import './Header.scss';
@@ -6,7 +6,7 @@ import SearchBox from './SearchBox';
 import { BiMenu, BiX } from 'react-icons/bi';
 import { SideMenuContext } from '../../context/SideMenuContext';
 import logo from '../../assets/logo.png';
-// import NavigationLinks from "./NavigationLinks";
+import NavigationLinks from './NavigationLinks';
 
 const Header = () => {
 	const { isOpen, setIsOpen } = useContext(SideMenuContext);
@@ -32,12 +32,14 @@ const Header = () => {
 					<img src={logo} alt='Logo' />
 				</NavLink>
 			</div>
-			{/* <NavigationLinks  /> */}
-			<div className='cart'>
-				<Cart />
+			<div className='header-container__navigation-link'>
+				<NavigationLinks />
 			</div>
 			<div className='search-container'>
 				<SearchBox />
+			</div>
+			<div className='cart'>
+				<Cart />
 			</div>
 		</div>
 	);

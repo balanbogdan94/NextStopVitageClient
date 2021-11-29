@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import './SidebarAdmin.scss';
 
 const SidebarAdmin = ({ isOpen }) => {
@@ -8,15 +9,19 @@ const SidebarAdmin = ({ isOpen }) => {
 
 	return (
 		<div className={getStyle}>
-			<div className="navigation-links">
+			<div className='navigation-links'>
 				<ul>
-					<li>Products</li>
-					<li>Orders</li>
+					<NavLink className='item' to='/admin'>
+						<li>PRODUCTS</li>
+					</NavLink>
+					<NavLink className='item' to='/admin/home-page'>
+						<li>HOME PAGE</li>
+					</NavLink>
 					<li>Drop</li>
 					<li>Blog</li>
 				</ul>
 			</div>
-			<button className="logOut-button">Log Out</button>
+			<button className='logOut-button'>Log Out</button>
 		</div>
 	);
 };

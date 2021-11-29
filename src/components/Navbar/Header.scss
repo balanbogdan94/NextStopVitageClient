@@ -1,158 +1,96 @@
+.header-container {
+	box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+	background-color: white;
+	width: 100%;
+	padding: 1rem 1rem;
+	position: sticky;
+	top: 0;
+	display: grid;
+	align-items: center;
+	grid-template-columns: 1fr 3fr 1fr;
+	grid-template-rows: 1fr auto;
+	row-gap: 1rem;
+	z-index: 4;
 
-  .header-container {
-    box-shadow: 0 2px 4px 0 rgba( 0, 0, 0, .1);
-    background-color: white;
-    width: 100%;
-    padding: 1rem 1rem;
-    position: sticky;
-    top: 0;
-    display: grid;
-    align-items: center;
-    grid-template-columns:  1fr 3fr 1fr;
-    grid-template-rows:  1fr auto;
-    row-gap: 1rem;
-    z-index: 4;
+	.hamburger-menu {
+		display: block;
+		cursor: pointer;
+		grid-row: 2;
+		grid-column: 1;
+	}
 
+	.logo {
+		grid-column: 2;
 
-    .hamburger-menu{
-        display: block;
-        cursor: pointer;
-        grid-row: 2;
-        grid-column: 1;
-    }
+		img {
+			display: block;
+			max-height: 60px;
+			max-width: 60px;
+			margin: auto;
+		}
+	}
 
-    .logo{
-      grid-column: 2;
-      
+	.cart {
+		float: right;
+		grid-row: 2;
+		grid-column: 3;
+	}
 
-      img {
-        display: block;
-        max-height: 60px;
-        max-width: 60px;
-        margin: auto;
-      }
-    }
+	.search-container {
+		grid-column: 2;
+		grid-row: 2;
+	}
 
-    .cart {
-      float: right;
-      grid-row: 2;
-      grid-column: 3;
-    }
-
-    .search-container {
-      grid-column: 2;
-      grid-row: 2;
-    }
+	&__navigation-link {
+		display: none;
+	}
 }
 
+@media screen and (min-width: 800px) {
+	.header-container {
+		display: flex;
+		height: 100px;
+		align-items: center;
+		background-color: white;
+		padding: 0 15vw;
+		gap: 10px;
 
+		.hamburger-menu {
+			display: none;
+		}
 
+		.logo img {
+			height: 75px;
+			width: 75px;
+		}
 
-// @media screen and (min-width: 800px) {
-// .header {
-//   min-height: 10vh;
-//   display: flex;
-//   justify-content: space-between;
-//   height: 80px;
-//   align-items: center;
-//   background-color: white;
-//   padding: 0 40px;
+		&__navigation-link {
+			display: inline-block;
+			flex: 1;
+			ul {
+				list-style: none;
+				display: inline;
+				margin: 0;
+				padding: 0;
 
-//   .hamburger {
-//       display: none;
-      
-//   }
+				.item {
+					display: inline;
+					text-decoration: none;
+					color: var(--text-color-main);
+					padding-right: 10px;
+					font-size: 18px;
+					font-family: 'Nunito', sans-serif;
 
-//   .nav-items {
-//     flex-grow: 1;
-//   }
+					&--sale {
+						color: red;
+					}
+				}
 
-//   .nav-items ul {
-//     list-style: none;
-//   }
-
-//   .right-side-options {
-//     float: right;
-//     flex-grow: 1;
-//     align-items: center;
-//     width: 100%;
-//     display: flex;
-//     justify-content: flex-end;
-
-//     .test-class {
-//       height: auto;
-//     }
-//   }
-
-//   .logo img {
-//     height: 60px;
-//     width: 60px;
-//     padding-right: 10px;
-//   }
-
-//   .item {
-//     text-decoration: none;
-//     display: inline;
-//     color: var(--color-text-main);
-//     padding: 0 10px;
-
-//     &--sale {
-//       color: red;
-//       font-weight: bold;
-//     }
-
-//     li {
-//       display: inline;
-//     }
-
-//     &:hover {
-//       text-decoration: underline;
-//     }
-//   }
-
-//   .activeStyle {
-//     font-weight: bold;
-//   }
-// }
-// }
-
-//FOR HAMBURGER MENU
-    // .nav-items {
-    //   position: fixed;
-    //   display: block;
-    //   background-color: black;
-    //   height: calc(100vh - 80px);
-    //   align-self: flex-start;
-    //   width:100%;
-    //   text-align: center;
-    //   margin-top: 80px;
-    //   clip-path: circle(0px at 0 0);
-    //   -webkit-clip-path: circle(0px at 0 0);
-    //   transition: all 0.5s ease-out;
-    //   align-items: center;
-    //   font-size: 18px;
-
-
-
-
-    //   &--visible{
-    //       visibility: visible;
-    //       clip-path: circle(500px at 0 0);
-    //       -webkit-clip-path: circle(1000px at 0 0);
-    //   }
-
-    //   &--hidden{
-    //       visibility: hidden;
-    //   }
-
-    // .item {
-    //   display: list-item;
-    //   padding: 30px 0;
-    //   color: white;
-
-    //   &--sale {
-    //     color: red;
-    //     font-weight: bold;
-    //   }
-
-    // }
+				li {
+					display: inline;
+					padding-left: 20px;
+				}
+			}
+		}
+	}
+}

@@ -10,6 +10,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 import AdminLayout from './layout/AdminLayout';
 import Products from './pages/Product/Products';
 import Product from './pages/Product/Product';
+import HomePage from './pages/Admin/HomePage';
 
 function App() {
 	return (
@@ -39,7 +40,19 @@ function App() {
 						path='/admin'
 						element={
 							<ProtectedRoute>
-								<AdminDashboard />
+								<AdminLayout>
+									<Dashboard />
+								</AdminLayout>
+							</ProtectedRoute>
+						}
+					/>
+					<Route
+						path='/admin/home-page'
+						element={
+							<ProtectedRoute>
+								<AdminLayout>
+									<HomePage />
+								</AdminLayout>
 							</ProtectedRoute>
 						}
 					/>
@@ -54,14 +67,6 @@ function App() {
 }
 
 // TODO: Remove when pages are implemented
-
-function AdminDashboard() {
-	return (
-		<AdminLayout>
-			<Dashboard />
-		</AdminLayout>
-	);
-}
 
 const ProductsPage = () => (
 	<UserLayout>
